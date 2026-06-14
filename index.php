@@ -17,7 +17,7 @@ $BOT_TOKEN = getenv("TELEGRAM_BOT_TOKEN");
 $API_URL = "https://api.telegram.org/bot{$BOT_TOKEN}/";
 
 define('REFRESH_COOLDOWN', 60);
-define('COOLDOWN_FILE', __DIR__ . '/cooldowns.json');
+define('COOLDOWN_FILE', '/tmp/cooldowns.json');
 
 function telegramRequest($method, $data = []) {
     global $API_URL;
@@ -158,15 +158,15 @@ function getPrice($appid, $currency, $market_hash_name, $divide = 1) {
 }
 
 $regions = [
-    ["USA",        1, 1],
-    ["Argentina",  1, 1],
-    ["Turkey",     1, 1],
-    ["Ukraine",   18, 1],
-    ["Russia",     5, 100],
-    ["Brazil",     7, 100],
-    ["India",     24, 1],
-    ["Kazakhstan",37, 1],
-    ["China",     23, 1]
+    ["🇺🇸 USA",1,1],
+    ["🇦🇷 Argentina",1,1],
+    ["🇹🇷 Turkey",1,1],
+    ["🇺🇦 Ukraine",18,100],
+    ["🇷🇺 Russia",5,100],
+    ["🇧🇷 Brazil",7,100],
+    ["🇮🇳 India",24,1],
+    ["🇰🇿 Kazakhstan",37,100],
+    ["🇨🇳 China",23,1]
 ];
 
 $mainMenu = [
@@ -185,7 +185,7 @@ $mainMenu = [
         ],
         [
             [
-                'text' => 'ℹ️ Info',
+                'text' => 'ℹ️ About',
                 'callback_data' => 'about'
             ]
         ]
@@ -194,15 +194,14 @@ $mainMenu = [
 
 function getCurrencySymbol($region) {
 
-    return match($region) {
-        "Ukraine" => "₴",
-        "Russia" => "руб.",
-        "India" => "₹",
-        "Brazil" => "R$",
-        "Kazakhstan" => "₸",
-        "China" => "¥",
-        default => "$"
-    };
+    if (str_contains($region, 'Ukraine')) return '₴';
+    if (str_contains($region, 'Russia')) return '₽';
+    if (str_contains($region, 'India')) return '₹';
+    if (str_contains($region, 'Brazil')) return 'R$';
+    if (str_contains($region, 'Kazakhstan')) return '₸';
+    if (str_contains($region, 'China')) return '¥';
+
+    return '$';
 }
 
 function buildPriceTable($type, $regions) {
@@ -392,10 +391,6 @@ if ($text === '/about') {
     exit;
 }
 
-if ($data && $callback_id) {
-    answerCallbackQuery($callback_id);
-}
-
 if ($data === 'show_keys') {
 
     sendPriceTable(
@@ -424,14 +419,26 @@ if ($data === 'refresh_key') {
 
     if (!canRefresh($user_id, 'key')) {
 
+        $cooldowns = getCooldowns();
+
+        $key = $user_id . '_key';
+
+        $remaining =
+            REFRESH_COOLDOWN -
+            (time() - ($cooldowns[$key] ?? 0));
+
         answerCallbackQuery(
             $callback_id,
-            'Please wait 60 seconds before refreshing again.',
+            "⏳ Please wait {$remaining}s before refreshing again.",
             true
         );
 
         exit;
     }
+
+    markRefresh($user_id, 'key');
+
+    answerCallbackQuery($callback_id);
 
     sendPriceTable(
         $chat_id,
@@ -447,14 +454,26 @@ if ($data === 'refresh_ticket') {
 
     if (!canRefresh($user_id, 'ticket')) {
 
+        $cooldowns = getCooldowns();
+
+        $key = $user_id . '_ticket';
+
+        $remaining =
+            REFRESH_COOLDOWN -
+            (time() - ($cooldowns[$key] ?? 0));
+
         answerCallbackQuery(
             $callback_id,
-            'Please wait 60 seconds before refreshing again.',
+            "⏳ Please wait {$remaining}s before refreshing again.",
             true
         );
 
         exit;
     }
+
+    markRefresh($user_id, 'ticket');
+
+    answerCallbackQuery($callback_id);
 
     sendPriceTable(
         $chat_id,
