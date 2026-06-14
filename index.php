@@ -218,9 +218,10 @@ function buildPriceTable($type, $regions) {
             ? '🔑 Key Prices'
             : '🎫 Ticket Prices';
 
-    $html = "<h1>{$title}</h1>";
-
-    $html .= "<table>";
+    $html = "
+    <table bordered striped>
+    <caption>{$title}</caption>
+    ";
 
     $html .= "
         <tr>
@@ -268,9 +269,9 @@ function buildPriceTable($type, $regions) {
     $html .= "</table>";
     
     $html .= "
-    <p>
+    <footer>
     🕒 Last refreshed: {$updatedAt}
-    </p>
+    </footer>
     ";
 
     return $html;
