@@ -272,6 +272,8 @@ function buildPriceTable($type, $regions) {
     🕒 Last refreshed: {$updatedAt}
     </p>
     ";
+
+    return html;
 }
 
 $content = file_get_contents("php://input");
