@@ -19,6 +19,8 @@ $API_URL = "https://api.telegram.org/bot{$BOT_TOKEN}/";
 define('REFRESH_COOLDOWN', 60);
 define('COOLDOWN_FILE', '/tmp/cooldowns.json');
 
+date_default_timezone_set('Asia/Tehran');
+
 function telegramRequest($method, $data = []) {
     global $API_URL;
 
@@ -161,11 +163,11 @@ $regions = [
     ["🇺🇸 USA",1,1],
     ["🇦🇷 Argentina",1,1],
     ["🇹🇷 Turkey",1,1],
-    ["🇺🇦 Ukraine",18,100],
+    ["🇺🇦 Ukraine",18,1],
     ["🇷🇺 Russia",5,100],
     ["🇧🇷 Brazil",7,100],
     ["🇮🇳 India",24,1],
-    ["🇰🇿 Kazakhstan",37,100],
+    ["🇰🇿 Kazakhstan",37,1],
     ["🇨🇳 China",23,1]
 ];
 
@@ -261,10 +263,17 @@ function buildPriceTable($type, $regions) {
         ";
     }
 
+    $updatedAt = date('Y-m-d H:i:s');
+    
     $html .= "</table>";
-
-    return $html;
+    
+    $html .= "
+    <p>
+    🕒 Last refreshed: {$updatedAt}
+    </p>
+    ";
 }
+
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
 
@@ -429,7 +438,7 @@ if ($data === 'refresh_key') {
 
         answerCallbackQuery(
             $callback_id,
-            "⏳ Please wait {$remaining}s before refreshing again.",
+            "⏳ Please wait {$remaining} seconds before refreshing again.",
             true
         );
 
