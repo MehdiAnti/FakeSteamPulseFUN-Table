@@ -319,7 +319,7 @@ function sendAbout($chat_id) {
         "This is a hobby project based on my best friend SteamPulse Web project.\n\n" .
         "Shoutout to him for his amazing work! @Amirhoseindavat ♡\n\n" .
         "Repo:\n" .
-        "https://github.com/MehdiAnti/FakeSteamPulseFUN\n\n" .
+        "https://github.com/MehdiAnti/FakeSteamPulseFUN-Table\n\n" .
         "Original:\n" .
         "https://github.com/CodeMageIR/SteamPulse_Web";
 
