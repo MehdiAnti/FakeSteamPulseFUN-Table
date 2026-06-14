@@ -161,11 +161,11 @@ $regions = [
     ["USA",        1, 1],
     ["Argentina",  1, 1],
     ["Turkey",     1, 1],
-    ["Ukraine",   18, 100],
+    ["Ukraine",   18, 1],
     ["Russia",     5, 100],
     ["Brazil",     7, 100],
     ["India",     24, 1],
-    ["Kazakhstan",37, 100],
+    ["Kazakhstan",37, 1],
     ["China",     23, 1]
 ];
 
