@@ -218,9 +218,10 @@ function buildPriceTable($type, $regions) {
             ? '🔑 Key Prices'
             : '🎫 Ticket Prices';
 
-    $html = "
+    $html = "<h2>{$title}</h2>";
+
+    $html .= "
     <table bordered striped>
-    <caption>{$title}</caption>
     ";
 
     $html .= "
