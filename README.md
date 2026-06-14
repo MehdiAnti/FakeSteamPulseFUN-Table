@@ -4,7 +4,7 @@
 
 ## Features
 
-- Show **TF2 Key & Ticket** prices for USA, Argentina, Turkey, Ukraine, Russia, India, Brazil, Kazakhstan.
+- Show **TF2 Key & Ticket** prices for USA, Argentina, Turkey, Ukraine, Russia, India, Brazil, Kazakhstan, China.
 - Inline **glass-style buttons** for easy navigation.
 - Sends price results in a **clean, readable format** as Table.
 
