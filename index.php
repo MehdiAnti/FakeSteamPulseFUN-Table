@@ -273,7 +273,7 @@ function buildPriceTable($type, $regions) {
     </p>
     ";
 
-    return html;
+    return $html;
 }
 
 $content = file_get_contents("php://input");
