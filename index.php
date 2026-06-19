@@ -3,6 +3,8 @@
 // Fake SteamPulse Telegram Bot - Support Table (RichMessage)
 // ==========================================================
 
+date_default_timezone_set('Asia/Tehran');
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
