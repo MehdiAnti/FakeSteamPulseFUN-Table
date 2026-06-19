@@ -265,7 +265,7 @@ function buildPriceTable($type, $regions) {
 
     $html .= "</table>";
     
-    $$timestamp = time();
+    $timestamp = time();
     
     $html .= "
     <footer>
