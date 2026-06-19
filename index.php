@@ -263,14 +263,15 @@ function buildPriceTable($type, $regions) {
         ";
     }
 
-    $timestamp = time();
-    
     $html .= "</table>";
+    
+    $$timestamp = time();
     
     $html .= "
     <footer>
     🕒 Last refreshed:
     <tg-time unix='{$timestamp}' format='wDT'>
+    " . date('Y-m-d H:i:s') . "
     </tg-time>
     </footer>
     ";
