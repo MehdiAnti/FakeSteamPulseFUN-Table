@@ -19,8 +19,6 @@ $API_URL = "https://api.telegram.org/bot{$BOT_TOKEN}/";
 define('REFRESH_COOLDOWN', 60);
 define('COOLDOWN_FILE', '/tmp/cooldowns.json');
 
-date_default_timezone_set('Asia/Tehran');
-
 function telegramRequest($method, $data = []) {
     global $API_URL;
 
@@ -265,13 +263,14 @@ function buildPriceTable($type, $regions) {
         ";
     }
 
-    $updatedAt = date('Y-m-d H:i:s');
+    $timestamp = time();
     
     $html .= "</table>";
     
     $html .= "
     <footer>
-    🕒 Last refreshed: {$updatedAt}
+    🕒 Last refreshed:
+    <tg-time unix='{$timestamp}' format='dT'></tg-time>
     </footer>
     ";
 
