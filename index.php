@@ -270,7 +270,9 @@ function buildPriceTable($type, $regions) {
     $html .= "
     <footer>
     🕒 Last refreshed:
-    <tg-time unix='{$timestamp}' format='dT'></tg-time>
+    <tg-time unix='1700000000' format='wDT'>
+    TEST
+    </tg-time>
     </footer>
     ";
 
