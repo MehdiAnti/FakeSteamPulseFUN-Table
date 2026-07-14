@@ -9,7 +9,7 @@ $ADMIN_ID   = getenv('ADMIN_ID');
 $DEBUG_TOKEN = getenv('DEBUG_TOKEN');
 
 define('BOT_NAME', 'Fake SteamPulse');
-define('BOT_VERSION', '2.0');
+define('BOT_VERSION', '2.1');
 
 define('REFRESH_COOLDOWN', 60);
 
