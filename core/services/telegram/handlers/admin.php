@@ -79,7 +79,22 @@ function handleAdminCommand($text, $chat_id, $user_id, $callback_id = null)
 
     $parts = preg_split('/\s+/', trim($text));
     $command = strtolower($parts[0]);
-
+    
+    $adminCommands = [
+        '/admin',
+        '/cache',
+        '/cacheclear',
+        '/stats',
+        '/health',
+        '/debug',
+        '/testrich',
+        '/testprice'
+        ];
+    
+    if (!in_array($command, $adminCommands, true)) {
+        return false;
+    }
+    
     switch ($command) {
 
         case '/admin':
